@@ -1,5 +1,7 @@
 os:
   linux
+language:
+  no
 dist:
   bionic
 before script:
