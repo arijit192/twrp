@@ -7,8 +7,8 @@ dist:
 before script:
   - sudo snap install git-repo
   - git clone https://github.com/akhilnarang/scripts && cd scripts && sudo bash setup/android_build_env.sh -q && sudo bash setup/install_android_sdk.sh -q
-  - git config --global user.email "tukaiari@gmail.com"
-  - git config --global user.name "Arijit Roy"
+  - sudo git config --global user.email "tukaiari@gmail.com"
+  - sudo git config --global user.name "Arijit Roy"
   - mkdir OrangeFox && cd OrangeFox
   - repo init --depth=1 -u https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0 -q
   - repo sync -j8 --force-sync -q
