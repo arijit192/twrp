@@ -6,15 +6,13 @@ dist:
   bionic
 before script:
   - sudo snap install git-repo
-  - git clone https://github.com/akhilnarang/scripts && cd scripts && sudo bash setup/android_build_env.sh -q && sudo bash setup/install_android_sdk.sh -q
-  - sudo git config --global user.email "tukaiari@gmail.com"
-  - sudo git config --global user.name "Arijit Roy"
-  - mkdir OrangeFox && cd OrangeFox
-  - repo init --depth=1 -u https://gitlab.com/OrangeFox/Manifest.git -b fox_9.0 -q
-  - repo sync -j8 --force-sync -q
   
 script:
-  - git clone https://github.com/TeamWin/android_device_xiaomi_violet.git device/xiaomi/violet -q
-  - git clone https://github.com/PixelExperience-Devices/kernel_xiaomi_sm6150.git kernel/xiaomi/violet -b ten -q
-  - source build/envsetup.sh && export ALLOW_MISSING_DEPENDENCIES=true && export LC_ALL="C"
-  - lunch omni_violet-eng && mka recoveryimage -q
+  - repo init -u https://github.com/Evolution-X/manifest -b ten
+  - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags -q
+  - git clone https://github.com/Sap1k/device_xiaomi_lavender.git device/xiaomi/lavender -q
+  - git clone https://github.com/Sap1k/vendor_xiaomi_lavender.git vendor/xiaomi/lavender -q
+  - git clone https://github.com/Sap1k/kernel_sdm660.git kernel/xiaomi/lavender -q
+  - . build/envsetup.sh
+  - lunch aosp_lavender-userdebug
+  - mka bacon -j3
